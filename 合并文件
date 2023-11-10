@@ -1,4 +1,4 @@
-【把PEP CH 的文件 合并到 PEP  CH Combined 文件夹中】
+#【把PEP CH 的文件 合并到 PEP  CH Combined 文件夹中】
 # 设置源文件夹路径
 source_folder <- "C:/Users/LENOVO/Desktop/lab/PEP CH"
 
@@ -23,7 +23,7 @@ for (subfolder in subfolders) {
   file.copy(all_files, target_folder, overwrite = TRUE)
 }
 
-【把所有PEP的文件 合并到 PEP Combined 文件夹中】
+# 【把所有PEP的文件 合并到 PEP Combined 文件夹中】
 # 设置源文件夹路径
 source_folder <- "C:/Users/LENOVO/Desktop/lab/PEP"
 
@@ -48,7 +48,7 @@ for (subfolder in subfolders) {
   file.copy(all_files, target_folder, overwrite = TRUE)
 }
 
-【把PEP Combined 文件夹中 station 的文件 单独放到一个文件夹中】
+# 【把PEP Combined 文件夹中 station 的文件 单独放到一个文件夹中】
 # 设置源文件夹路径
 source_folder <- "C:/Users/LENOVO/Desktop/lab/PEP Combined"
 
