@@ -1,3 +1,4 @@
+【把PEP CH 的文件 合并到 PEP  CH Combined 文件夹中】
 # 设置源文件夹路径
 source_folder <- "C:/Users/LENOVO/Desktop/lab/PEP CH"
 
@@ -21,3 +22,49 @@ for (subfolder in subfolders) {
   # 移动文件到目标文件夹
   file.copy(all_files, target_folder, overwrite = TRUE)
 }
+
+【把所有PEP的文件 合并到 PEP Combined 文件夹中】
+# 设置源文件夹路径
+source_folder <- "C:/Users/LENOVO/Desktop/lab/PEP"
+
+# 设置目标文件夹路径
+target_folder <- "C:/Users/LENOVO/Desktop/lab/PEP Combined"
+
+# 获取所有文件夹的列表
+subfolders <- list.dirs(source_folder, full.names = TRUE, recursive = FALSE)
+
+# 定义目标文件名的正则表达式
+pattern <- "PEP725_(.*).csv"
+
+# 遍历每个文件夹
+for (subfolder in subfolders) {
+  # 获取文件夹中的所有文件
+  all_files <- list.files(subfolder, full.names = TRUE)
+  
+  # 筛选出包含目标文件的文件
+  target_files <- grep(pattern, all_files, value = TRUE, ignore.case = TRUE)
+  
+  # 移动文件到目标文件夹
+  file.copy(all_files, target_folder, overwrite = TRUE)
+}
+
+【把PEP Combined 文件夹中 station 的文件 单独放到一个文件夹中】
+# 设置源文件夹路径
+source_folder <- "C:/Users/LENOVO/Desktop/lab/PEP Combined"
+
+# 设置目标文件夹路径
+target_folder <- "C:/Users/LENOVO/Desktop/lab/PEP Combined/stations"
+
+# 创建目标文件夹（如果不存在）
+if (!dir.exists(target_folder)) {
+  dir.create(target_folder)
+}
+
+# 获取源文件夹中的所有文件
+all_files <- list.files(source_folder, full.names = TRUE)
+
+# 筛选出包含 "stations" 的文件
+stations_files <- grep("stations", all_files, value = TRUE, ignore.case = TRUE)
+
+# 移动文件到目标文件夹
+file.rename(stations_files, file.path(target_folder, basename(stations_files)))
