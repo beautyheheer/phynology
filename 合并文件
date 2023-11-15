@@ -212,3 +212,35 @@ total_lines <- sum(sapply(files, function(file) {
 
 # 打印总行数
 print(total_lines)
+
+
+
+
+
+
+
+#【合并两个csv文件 把站点和物候数据放一起】
+# 导入所需的包
+library(dplyr)
+
+# 读取两个 CSV 文件
+path_bbch <- "C:/Users/LENOVO/Desktop/lab/Filtered_data_code_PEP/BBCH 65 flower 1.csv"
+path_allstations <- "C:/Users/LENOVO/Desktop/lab/allstations.csv"
+
+bbch_data <- read.csv(file = path_bbch, header = TRUE)
+allstations_data <- read.csv(file = path_allstations, header = TRUE)
+
+# 使用 dplyr 包中的 merge 函数，基于 'PEP_ID' 合并两个数据框
+merged_data <- merge(bbch_data, allstations_data, by = "PEP_ID", all.x = TRUE)
+
+# 选择要保留的列，并将其中一个 'Country' 列重命名为 'Country'
+merged_data <- merged_data %>%
+  select(-matches("\\.y")) %>%
+  rename(Country = Country.x)
+
+# 定义新文件的保存路径
+output_path <- "C:/Users/LENOVO/Desktop/lab/Filtered_data_code_PEP/st BBCH 65 flower 1.csv"
+
+# 将合并后的数据保存为新的 CSV 文件
+write.csv(merged_data, file = output_path, row.names = FALSE)
+
