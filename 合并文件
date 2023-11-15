@@ -191,3 +191,24 @@ all_data <- all_data[, c("Country", "PEP_ID", "National_ID", "LON", "LAT", "ALT"
 
 # 将合并后的数据写入一个新的 CSV 文件
 write.csv(all_data, file = "C:/Users/LENOVO/Desktop/lab/PEP stations/allstations.csv", row.names = FALSE)
+
+
+
+
+
+
+#【计算文件夹中的总行数】
+# 设置文件夹路径
+folder_path <- "C:/Users/LENOVO/Desktop/lab/PEP stations"
+
+# 获取文件夹中的所有 CSV 文件
+files <- list.files(folder_path, pattern = "\\.csv$", full.names = TRUE)
+
+# 计算所有文件总共的行数
+total_lines <- sum(sapply(files, function(file) {
+  count_lines <- length(readLines(file))
+  return(count_lines)
+}))
+
+# 打印总行数
+print(total_lines)
