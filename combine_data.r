@@ -244,3 +244,55 @@ output_path <- "C:/Users/LENOVO/Desktop/lab/Filtered_data_code_PEP/st BBCH 65 fl
 # 将合并后的数据保存为新的 CSV 文件
 write.csv(merged_data, file = output_path, row.names = FALSE)
 
+
+
+
+
+# 【文件夹中的信息统计】
+# 读取 CSV 文件
+file_path <- "C:/Users/LENOVO/Desktop/lab/Filtered_data_code_PEP/st BBCH 11 leaf.csv"
+data <- read.csv(file_path, header = TRUE)
+
+# 选择 Country 列为 "DE" 的子集
+subset_DE <- subset(data, Country == "DE")
+subset_AT <- subset(data, Country == "AT")
+
+# 统计 PEP_ID 列的类别数量
+pep_id_count <- table(data$PEP_ID)
+
+# 统计 Country 列的类别数量 对结果进行排序（按照数量从大到小）
+country_count <- table(data$Country)
+sorted_country_count <- sort(country_count, decreasing = TRUE)
+
+# 统计 treetype 列的类别数量
+treetype_count <- table(data$treetype)
+sorted_treetype_count <- sort(treetype_count, decreasing = TRUE)
+
+# 对子集中 treetype 列的类别进行数量统计
+treetype_count_DE <- table(subset_DE$treetype)
+sorted_treetype_count_DE <- sort(treetype_count_DE, decreasing = TRUE)
+
+treetype_count_AT <- table(subset_AT$treetype)
+sorted_treetype_count_AT <- sort(treetype_count_AT, decreasing = TRUE)
+
+# 输出每个类别的数量统计结果
+print("PEP_ID Count:")
+print(pep_id_count)
+
+# 输出排序后的结果
+print("Country Count (Sorted):")
+print(sorted_country_count)
+
+# 输出排序后的结果
+print("treetype Count (Sorted):")
+print(sorted_treetype_count)
+
+# 输出 Country 列为 "DE" 中 treetype 列的数量统计结果
+print("treetype Count in Country DE:")
+print(sorted_treetype_count_DE)
+
+# 输出 Country 列为 "DE" 中 treetype 列的数量统计结果
+print("treetype Count in Country AT:")
+print(sorted_treetype_count_AT)
+
+
