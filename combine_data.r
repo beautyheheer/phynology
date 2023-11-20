@@ -296,3 +296,23 @@ print("treetype Count in Country AT:")
 print(sorted_treetype_count_AT)
 
 
+
+
+
+
+
+
+# 【取文件夹中的子集】
+# 读取 CSV 文件
+file_path <- "C:/Users/LENOVO/Desktop/lab/Filtered_data_code_PEP/st BBCH 11 leaf.csv"
+data <- read.csv(file_path, header = TRUE)
+
+# 选择 Country 列为 "DE" 的子集
+subset_DE <- subset(data, Country == "DE")
+
+# 确定新文件的保存路径
+new_file_path <- "C:/Users/LENOVO/Desktop/lab/Filtered_data_code_PEP/DE_11.csv"
+
+# 将符合条件的子集保存到新的 CSV 文件中
+write.csv(subset_DE, file = new_file_path, row.names = FALSE)
+
