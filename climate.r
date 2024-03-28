@@ -157,3 +157,40 @@ head(final_data_with_all)
 # 将修改后的数据写入新的CSV文件
 write.csv(final_data_with_all, "C:/Users/LENOVO/Desktop/phephy/ERA/climate_data_all.csv", row.names = FALSE)
 
+
+
+
+
+
+# ---- 将气象数据和物候数据进行合并 ----
+
+library(tidyr)
+library(dplyr)
+
+# 设置工作目录
+setwd("C:/Users/LENOVO/Desktop/phephy/data")
+
+# 读取数据
+phenology_data <- read.csv("C:/Users/LENOVO/Desktop/phephy/data/data_50y_filtered.csv", stringsAsFactors = FALSE)
+climate_data <- read.csv("C:/Users/LENOVO/Desktop/phephy/ERA/climate_data_all.csv", stringsAsFactors = FALSE)
+
+# 选择 climate_data 中你需要的列，确保使用正确的日期列名称
+climate_data_selected <- climate_data %>%
+  select(PEP_ID, YEAR, DAY, TSOS, FU, CU, pre, eva, ther, sol)
+
+# 确保 phenology_data 中有一个 DAY 列与 climate_data 的日期列相对应
+phenology_data$DAY <- phenology_data$DOY
+
+# 使用 dplyr 的 left_join 函数来匹配和合并数据
+merged_data <- left_join(phenology_data, climate_data_selected, by = c("PEP_ID", "YEAR", "DAY"))
+
+# 计算 pre_net 列
+merged_data$pre_net <- merged_data$pre + merged_data$eva
+
+# 查看结果
+head(merged_data)
+
+
+# 保存新文件
+write.csv(phenology_data, "C:/Users/LENOVO/Desktop/phephy/data/data.csv", row.names = FALSE)
+
